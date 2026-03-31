@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Codey Rocky Virtual — Tech & Science Kids</title>
+
+  <!-- Tipografías oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="robot.js" defer></script>
+  <script src="main.js" defer></script>
+  <script src="ui.js" defer></script>
+  <script src="https://unpkg.com/blockly/blockly.min.js" defer></script>
+  <script src="blockly-config.js" defer></script>
+</head>
+
+<body>
+  <!-- Overlay for portrait on mobile -->
+  <div id="rotateOverlay" class="rotate-overlay" aria-hidden="true">
+    <div class="rotate-card">
+      <div class="rotate-icon">📱↻</div>
+      <h2>Gira tu dispositivo</h2>
+      <p>
+        Para usar el simulador cómodamente, pon tu celular en <strong>modo horizontal</strong>.
+        <br/>Cuando lo gires, esta pantalla desaparecerá.
+      </p>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="tech-logo" aria-label="Tech & Science Kids"></div>
+      <div>
+        <h1>Codey Rocky Virtual</h1>
+        <p class="sub">Tech & Science Kids — Simulador estilo mBlock</p>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="toolbar">
+      <button id="btnRun" class="btn primary" type="button">
+        <span class="dot"></span> ▶ Ejecutar
+      </button>
+      <button id="btnStop" class="btn danger" type="button">
+        <span class="dot"></span> ⏹ Detener
+      </button>
+
+      <div class="pill">
+        <label for="speed">Velocidad</label>
+        <input id="speed" type="range" min="0.25" max="2" step="0.25" value="1" />
+        <span id="speedVal">1.00×</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app">
+    <!-- LEFT: Workspace + Categories + Blocks drawer -->
+    <section class="panel" aria-label="Workspace">
+      <div class="panel-header">
+        <div class="panel-title">Área de trabajo</div>
+        <div class="badge">Blockly · Toolbox nativo</div>
+      </div>
+
+      <div class="workspace-shell">
+        <!-- Workspace -->
+        <div id="blocklyDiv">
+          <div class="workspace-controls" id="workspaceControls">
+            <button id="btnHideStage" title="Ocultar escenario">⛶</button>
+            <button id="btnZoomIn" title="Acercar">＋</button>
+            <button id="btnZoomOut" title="Alejar">－</button>
+            <button id="btnResetView" title="Reiniciar vista">⟲</button>
+            <button id="btnUndo" title="Deshacer">↶</button>
+            <button id="btnRedo" title="Rehacer">↷</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Stage -->
+    <section class="panel" aria-label="Escenario">
+      <div class="stage-top">
+        <div class="panel-title">Escenario</div>
+        <div class="mini">
+          <span class="status stopped" id="simStatus"><span class="led"></span><span id="simStatusText">Detenido</span></span>
+          <span class="badge">Tablero a escala</span>
+          <button id="btnTheater" class="btn" title="Ampliar escenario">⛶</button>
+        </div>
+      </div>
+
+      <div class="stage-body">
+        <div class="stage-canvas">
+          <canvas id="stage"></canvas>
+        </div>
+
+        <div class="debug-panel">
+          <div class="panel-header" style="border-radius:16px;">
+            <div class="panel-title">Salida / Debug</div>
+            <div class="badge">opcional</div>
+          </div>
+
+          <pre id="codeOut" class="readout">// Logs del simulador y/o JS generado por Blockly.</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+  <xml id="toolbox" style="display:none">
+  <category name="Eventos" colour="#FEC619">
+    <block type="event_when_flag_clicked"></block>
+    <block type="event_when_key_pressed"></block>
+    <block type="event_when_button_a_pressed"></block>
+    <block type="event_when_i_receive"></block>
+    <block type="event_broadcast"></block>
+    <block type="event_broadcast_and_wait"></block>
+  </category>
+
+  <category name="Acción" colour="#4C97FF">
+    <block type="codey_move_forward_time"></block>
+    <block type="codey_move_backward_time"></block>
+
+    <block type="codey_go_straight_forward_time"></block>
+    <block type="codey_go_straight_backward_time"></block>
+
+    <block type="codey_turn_left_time"></block>
+    <block type="codey_turn_right_time"></block>
+
+    <block type="codey_move_direction_power"></block>
+    <block type="codey_drive_wheels_power"></block>
+
+    <block type="codey_turn_left_angle"></block>
+    <block type="codey_turn_right_angle"></block>
+    <block type="codey_stop"></block>
+  </category>
+
+  <category name="Control" colour="#FFAB19">
+    <block type="control_wait"></block>
+    <block type="control_wait_until"></block>
+    <block type="control_repeat"></block>
+    <block type="control_repeat_until"></block>
+    <block type="control_while"></block>
+    <block type="control_forever"></block>
+    <block type="control_if"></block>
+    <block type="control_if_else"></block>
+    <block type="control_stop"></block>
+  </category>
+
+  <category name="Sensores" colour="#5CB1D6">
+    <block type="sensing_touching_edge"></block>
+  </category>
+</xml>
+</body>
+</html>
